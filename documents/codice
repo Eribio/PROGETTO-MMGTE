@@ -1,1 +1,59 @@
 
+class Main {
+
+	public static void main(String[] args) {
+		Sensore s= new Sensore (2,"temperatura",21,20,25);
+		int f= s.rest_id();
+		System.out.println(f);
+	    boolean i=s.invio();
+	    System.out.println(i);
+	    for(int cont=3;cont<5;cont++) {
+	    	float casuale= (int)(Math.random()*100);
+	    	Sensore a= new Sensore(cont,"umidita", casuale, 40, 60);
+	    	a.invio();
+	    }
+
+	}	
+
+}
+
+
+import java.util.ArrayList;
+
+public class Sensore {
+
+	private int id;
+	private String tipo;
+	private float p;
+	private float t1;
+	private float t2;
+	
+	public Sensore(int id, String tipo, float p, float t1, float t2) {
+		this.id = id;
+		this.tipo = tipo;
+		this.p = p;
+		this.t1 = t1;
+		this.t2 = t2;
+	}
+	public int rest_id() {
+		return this.id;
+	}
+	public float get() {
+		return this.p;
+	}
+	public String rest_tipo() {
+		return this.tipo;
+	}
+	public boolean invio () {
+		ArrayList<Object> lista= new ArrayList<>();
+		lista.add(p);
+		lista.add(id);
+		boolean inserimento= new Connessione().insert(lista);
+		return inserimento;
+	}
+	
+}
+	
+
+
+
